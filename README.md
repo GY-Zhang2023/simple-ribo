@@ -19,6 +19,7 @@ conda env create -f environment.yml
 ## Activate environmentbash
 ```bash
 source env/ribo_LAN_env.sh
+bash tools/check_env.sh
 ribo_LAN -h
 rna_LAN -h
 ```
