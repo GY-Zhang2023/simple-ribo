@@ -8,10 +8,11 @@ dependencies:
   - cutadapt>=4.0
   - trim-galore
   - bowtie2>=2.5
-  - star>=2.7.11
+  - star=2.7.11b
   - hisat2>=2.2.1
   - stringtie
   - samtools>=1.18
+  - ribowaltz>=1.2.0
   - fastqc
   - dos2unix
   - bedtools
@@ -44,6 +45,5 @@ dependencies:
   - bioconductor-txdbmaker
   - bioconductor-deseq2
   - bioconductor-clusterprofiler
-  - bioconductor-ribowaltz
   - bioconductor-org.hs.eg.db
   - bioconductor-org.mm.eg.db
