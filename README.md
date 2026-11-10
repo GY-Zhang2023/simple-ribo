@@ -52,6 +52,7 @@ Sample csv templates are under folder `example/`
 - `group.csv` for differential analysis
 ## Usage example
 ```bash
+cd ~/ribo_simple_LAN ##OR(cd ~/rna_simple_LAN)
 mkdir -p your_ribo_project
 cd your_ribo_project
 mkdir -p 1.raw_fastq
