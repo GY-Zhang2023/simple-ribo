@@ -2,7 +2,6 @@ name: ribo_simple
 channels:
   - bioconda
   - conda-forge
-channel_priority: strict
 dependencies:
   - r-base=4.4
   - cutadapt>=4.0
