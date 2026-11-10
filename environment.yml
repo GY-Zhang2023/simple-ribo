@@ -2,6 +2,7 @@ name: ribo_simple
 channels:
   - bioconda
   - conda-forge
+  - nodefaults
 dependencies:
   - r-base=4.4
   - cutadapt>=4.0
@@ -34,15 +35,3 @@ dependencies:
   - r-factoextra
   - r-factominer
   - r-ggseqlogo
-  - bioconductor-biocparallel
-  - bioconductor-s4vectors
-  - bioconductor-iranges
-  - bioconductor-genomicranges
-  - bioconductor-genomicfeatures
-  - bioconductor-genomicalignments
-  - bioconductor-biostrings
-  - bioconductor-txdbmaker
-  - bioconductor-deseq2
-  - bioconductor-clusterprofiler
-  - bioconductor-org.hs.eg.db
-  - bioconductor-org.mm.eg.db
