@@ -4,7 +4,7 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
-  - r-base=4.4
+  - r-base=4.5
   - cutadapt>=4.0
   - trim-galore
   - bowtie2>=2.5
