@@ -14,6 +14,8 @@ Workflow
 git clone https://github.com/GY-Zhang2023/simple-ribo.git
 cd simple-ribo
 bash install.sh
+mkdir -p ~/conda_pkgs
+export CONDA_PKGS_DIRS=~/conda_pkgs
 conda env create -f environment.yml
 ```
 ## Activate environmentbash
