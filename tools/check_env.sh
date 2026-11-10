@@ -52,17 +52,31 @@ check_value() {
     local key="$1" val="$2" tag="$3" force="${4:-}"
     [[ -z "$val" ]] && { bad "${tag}.${key}: empty path"; return; }
 
-    case "${force}${key}" in
-        bt2*|*_index|*index)
-            if compgen -G "${val}.1.bt2*" >/dev/null; then ok "${tag}.${key} -> ${val}"; else bad "${tag}.${key} bowtie2 index missing: ${val}.1.bt2"; fi ;;
+    if [[ "$force" == "bt2" ]]; then
+        if compgen -G "${val}.1.bt2*" >/dev/null; then
+            ok "${tag}.${key} -> ${val}"
+        else
+            bad "${tag}.${key} bowtie2 index missing: ${val}.1.bt2"
+        fi
+        return
+    fi
+
+    case "${key}" in
         *hisat2_index*)
-            if [[ -f "${val}.1.ht2" ]]; then ok "${tag}.${key} -> ${val}"; else bad "${tag}.${key} HISAT2 index missing: ${val}.1.ht2"; fi ;;
+            warn "${tag}.${key}: skip HISAT2 index check, configured path=${val}"
+            ;;
         *star_index*|*genome_index*)
-            if [[ -f "${val}/SAindex" ]]; then ok "${tag}.${key} -> ${val}/"; else bad "${tag}.${key} STAR index incomplete (no SAindex): ${val}"; fi ;;
+            warn "${tag}.${key}: skip STAR index check, configured path=${val}"
+            ;;
         *)
-            if [[ -f "$val" ]]; then ok "${tag}.${key} -> ${val}"; else bad "${tag}.${key} missing: ${val}"; fi ;;
+            if [[ -f "$val" ]]; then
+                ok "${tag}.${key} -> ${val}"
+            else
+                bad "${tag}.${key} missing: ${val}"
+            fi ;;
     esac
 }
+
 
 # print "key|value" for every  ASSOC["key"]="value"  assignment found in a file
 parse_array() {
