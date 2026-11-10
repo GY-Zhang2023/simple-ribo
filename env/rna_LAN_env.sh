@@ -4,13 +4,18 @@
 
 CONDA_ENV_NAME="ribo_simple"
 
-CONDA_INIT_PATH=""
-if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-    CONDA_INIT_PATH="$HOME/miniconda3/etc/profile.d/conda.sh"
-elif [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-    CONDA_INIT_PATH="$HOME/anaconda3/etc/profile.d/conda.sh"
-else
-    echo "[ERROR] Cannot find conda init script."
+# Auto‑detect conda init script
+if ! command -v conda &> /dev/null; then
+    echo "[ERROR] conda command not found in current shell."
+    return 1
+fi
+
+CONDA_BASE=$(conda info --base)
+CONDA_INIT_PATH="${CONDA_BASE}/etc/profile.d/conda.sh"
+
+if [ ! -f "${CONDA_INIT_PATH}" ]; then
+    echo "[ERROR] Cannot find conda init script at ${CONDA_INIT_PATH}"
+    echo "Check your conda installation."
     return 1
 fi
 
