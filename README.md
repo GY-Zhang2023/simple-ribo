@@ -62,20 +62,20 @@ cp ~/simple-ribo/example/group.csv 1.raw_fastq/          # sample_name,group_nam
 ```
 Ribo‑seq
 ```bash
-ribo_LAN --step1 ribo_sample.csv
-ribo_LAN --step2
-ribo_LAN --step3
-ribo_LAN --step4
-ribo_LAN --step5
-ribo_LAN --step6 group.csv gene_list.txt
+ribo_LAN --step1 ribo_sample.csv            # step1_filter_clean
+ribo_LAN --step2                            # step2_align
+ribo_LAN --step3                            # step3_riboWaltz
+ribo_LAN --step4                            # step4_A.P.E_around_motif
+ribo_LAN --step5                            # step5_personalize
+ribo_LAN --step6 group.csv gene_list.txt    # step6_ribo_group_diff
 ```
 Bulk RNA‑seq
 ```bash
-rna_LAN --step1 sample.csv
-rna_LAN --step2
-rna_LAN --step3 group.csv
-rna_LAN --step4
-rna_LAN --step5 group.csv
+rna_LAN --step1 sample.csv  # RNAstep1_filter_clean
+rna_LAN --step2             # RNAstep2_align.sh
+rna_LAN --step3 group.csv   # RNAstep3_countPCA
+rna_LAN --step4             # RNAstep4_TE.R
+rna_LAN --step5 group.csv   # RNAstep5_TE_diff_analysis
 ```
 ## Software version list
 | Software  | Version   |
