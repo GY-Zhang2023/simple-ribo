@@ -54,9 +54,6 @@ fi
 
 cat <<EOF
 
-wget https://github.com/LabTranslationalArchitectomics/riboWaltz/archive/refs/heads/master.zip
-unzip master.zip
-
 Done.
 Next:
   1) create the env:      mamba env create -f ${REPO}/environment.yml
@@ -64,3 +61,5 @@ Next:
   3) preflight check:     bash ${REPO}/tools/check_env.sh
   4) self test:           ribo_LAN -h ; rna_LAN -h
 EOF
+wget https://github.com/LabTranslationalArchitectomics/riboWaltz/archive/refs/heads/master.zip
+unzip master.zip
