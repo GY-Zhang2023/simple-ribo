@@ -455,6 +455,8 @@ echo "          Build index                    "
 echo "====================================="
 if [ "$SELECTED_TOOL" = "STAR" ]; then
     if [ ! -f "$INDEX/Genome" ]; then
+        mkdir -p "$INDEX" || { echo "[ERROR] cannot create $INDEX"; exit 1; }
+        [ -w "$INDEX" ] || { echo "[ERROR] $INDEX not writable (quota/space?)"; exit 1; }
         echo "Building STAR index..."
         "$STAR_BIN" --runMode genomeGenerate \
         --genomeDir "$INDEX" \
@@ -470,6 +472,8 @@ if [ "$SELECTED_TOOL" = "STAR" ]; then
     fi
 else
     if [ ! -f "$INDEX.1.ht2" ]; then
+        mkdir -p "$(dirname "$INDEX")" || { echo "[ERROR] cannot create $(dirname "$INDEX")"; exit 1; }
+        [ -w "$(dirname "$INDEX")" ] || { echo "[ERROR] $(dirname "$INDEX") not writable"; exit 1; }
         echo "Building HISAT2 index..."
         "$HISAT2_BUILD_BIN" -p "$THREADS" "$REF_GENOME" "$INDEX"
         echo "HISAT2 index built!"
