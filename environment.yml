@@ -12,7 +12,6 @@ dependencies:
   - hisat2>=2.2.1
   - stringtie
   - samtools>=1.18
-  - ribowaltz>=1.2.0
   - fastqc
   - dos2unix
   - bedtools
