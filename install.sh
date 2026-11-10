@@ -44,8 +44,8 @@ echo "[3/4] permissions"
 chmod +x "${TOOLS}"/*.sh "${TOOLS}"/ribo_LAN.sh "${TOOLS}"/rna_LAN.sh "${REPO}/env"/*.sh
 
 echo "[4/4] global commands"
-ln -sf "${TOOLS}/ribo_LAN.sh" "${LOCAL_BIN}/ribo_LAN.sh"
-ln -sf "${TOOLS}/rna_LAN.sh"  "${LOCAL_BIN}/rna_LAN.sh"
+ln -sf "${TOOLS}/ribo_LAN.sh" "${LOCAL_BIN}/ribo_LAN"
+ln -sf "${TOOLS}/rna_LAN.sh"  "${LOCAL_BIN}/rna_LAN"
 
 if ! grep -qs 'HOME/.local/bin' "${HOME}/.bashrc"; then
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> "${HOME}/.bashrc"
