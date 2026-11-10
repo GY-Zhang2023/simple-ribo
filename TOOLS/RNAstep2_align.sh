@@ -27,7 +27,7 @@ SPECIES_CONFIG["mouse_hisat2_index"]="${HOME_TOOLS}/HISAT2_index_GRCm39_vM35/HIS
 
 TOOL_PATHS=(
     "HISAT2_BIN:${HISAT2_BIN:-hisat2}"
-    "HISAT2_BUILD_BIN:${HOME_BIN}/hisat2/hisat2-build"
+    "HISAT2_BUILD_BIN:${HISAT2_BUILD_BIN:-hisat2-build}"
     "SAMTOOLS_BIN:samtools"
     "STRINGTIE_BIN:stringtie"
     "QUALIMAP_BIN:qualimap"
