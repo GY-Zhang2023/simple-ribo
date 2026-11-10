@@ -16,12 +16,12 @@ HOME_BIN="$HOME/tools"
 
 declare -A SPECIES_CONFIG
 SPECIES_CONFIG["human_ref_genome"]="${HOME_REF}/human_transcriptome/GRCh38.p14.canonical_genome.fa"
-SPECIES_CONFIG["human_gtf"]="${HOME_REF}/human_transcriptome/gencode.v49.annotation.gtf"
+SPECIES_CONFIG["human_gtf"]="${HOME_REF}/human_transcriptome/gencode.v49.pc_annotation.gtf"
 SPECIES_CONFIG["human_star_index"]="${HOME_TOOLS}/STAR_index_GRCh38_v49"
 SPECIES_CONFIG["human_hisat2_index"]="${HOME_TOOLS}/HISAT2_index_GRCh38_v49/HISAT2_index_GRCh38_v49"
 
 SPECIES_CONFIG["mouse_ref_genome"]="${HOME_REF}/mouse_transcriptome/GRCm39.p6.canonical_genome.fa"
-SPECIES_CONFIG["mouse_gtf"]="${HOME_REF}/mouse_transcriptome/gencode.vM35.annotation.gtf"
+SPECIES_CONFIG["mouse_gtf"]="${HOME_REF}/mouse_transcriptome/gencode.vM35.pc_annotation.gtf"
 SPECIES_CONFIG["mouse_star_index"]="${HOME_TOOLS}/STAR_index_GRCm39_vM35"
 SPECIES_CONFIG["mouse_hisat2_index"]="${HOME_TOOLS}/HISAT2_index_GRCm39_vM35/HISAT2_index_GRCm39_vM35"
 
