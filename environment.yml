@@ -2,9 +2,8 @@ name: ribo_simple
 channels:
   - bioconda
   - conda-forge
-  - defaults
+channel_priority: strict
 dependencies:
-  - python=3.8
   - r-base=4.4
   - cutadapt>=4.0
   - trim-galore
@@ -15,16 +14,36 @@ dependencies:
   - samtools>=1.18
   - fastqc
   - dos2unix
+  - bedtools
+  - qualimap
   - r-data.table
   - r-ggplot2
   - r-pheatmap
   - r-ggrepel
+  - r-future
   - r-future.apply
+  - r-furrr
+  - r-dplyr
+  - r-tidyr
+  - r-purrr
+  - r-scales
+  - r-cowplot
+  - r-gridextra
+  - r-rcolorbrewer
+  - r-r.utils
+  - r-factoextra
+  - r-factominer
+  - r-ggseqlogo
+  - bioconductor-biocparallel
+  - bioconductor-s4vectors
+  - bioconductor-iranges
+  - bioconductor-genomicranges
+  - bioconductor-genomicfeatures
+  - bioconductor-genomicalignments
+  - bioconductor-biostrings
+  - bioconductor-txdbmaker
   - bioconductor-deseq2
   - bioconductor-clusterprofiler
   - bioconductor-ribowaltz
-  - bioconductor-txdbmaker
-  - bioconductor-genomicalignments
-  - bioconductor-biostrings
   - bioconductor-org.hs.eg.db
   - bioconductor-org.mm.eg.db
