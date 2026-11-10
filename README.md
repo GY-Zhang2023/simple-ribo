@@ -11,7 +11,7 @@ Workflow
 
 ## ⚡ Quick install
 ```bash
-git clone https://github.com/YOUR_USERNAME/simple-ribo.git
+git clone https://github.com/GY-Zhang2023/simple-ribo.git
 cd simple-ribo
 bash install.sh
 conda env create -f environment.yml
