@@ -908,7 +908,7 @@ for (bam_path in trans_bam_paths) {
     ]
     reads_psite_dt_after_filter = nrow(reads_psite_dt)
     filter_remove_count = reads_psite_dt_before_filter - reads_psite_dt_after_filter
-    filter_valid_ratio = round(reads_psite_dt_after_filter / reads_psite_dt_before_filter * 100
+    filter_valid_ratio = round(reads_psite_dt_after_filter / reads_psite_dt_before_filter * 100)
     cat(paste0("✅ Global valid P-site filter | Before: ", reads_psite_dt_before_filter, " | After: ", reads_psite_dt_after_filter, "\n"))
     cat(paste0("✅ Removed invalid P-sites: ", filter_remove_count, " | Valid rate: ", filter_valid_ratio, "%\n"))
     cat(paste0("✅ All downstream analyses will use this valid P-site set\n"))
