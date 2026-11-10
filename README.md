@@ -18,9 +18,10 @@ mkdir -p ~/conda_pkgs
 export CONDA_PKGS_DIRS=~/conda_pkgs
 conda env create -f environment.yml
 ```
-## Activate environmentbash
+## Activate environment bash
 ```bash
 source env/ribo_LAN_env.sh
+Rscript install_bioc_pkgs.R > install_bioc.log 2>&1
 bash tools/check_env.sh
 ribo_LAN -h
 rna_LAN -h
