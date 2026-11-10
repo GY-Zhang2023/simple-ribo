@@ -48,9 +48,16 @@ Sample csv templates are under folder `example/`
 - `rna_sample.csv` for bulk RNA‑seq
 - `group.csv` for differential analysis
 ## Usage example
+```bash
+mkdir -p your_ribo_project
+cd your_ribo_project
+mkdir -p 1.raw_fastq
+cp YOUR_DATA_SAMPLE*.fastq.gz 1.raw_fastq/
+cp ~/simple-ribo/example/ribo_sample.csv 1.raw_fastq/    # sample_name,adapter_3,adapter_5
+cp ~/simple-ribo/example/group.csv 1.raw_fastq/          # sample_name,group_name
+```
 Ribo‑seq
 ```bash
-cd your_ribo_project
 ribo_LAN --step1 ribo_sample.csv
 ribo_LAN --step2
 ribo_LAN --step3
@@ -60,7 +67,6 @@ ribo_LAN --step6 group.csv gene_list.txt
 ```
 Bulk RNA‑seq
 ```bash
-cd your_rna_project
 rna_LAN --step1 sample.csv
 rna_LAN --step2
 rna_LAN --step3 group.csv
