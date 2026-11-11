@@ -202,7 +202,7 @@ library(FactoMineR)
 library(factoextra)
 
 # ---------------------- core parameter settings ----------------------
-threads <- 16           
+threads <- 8           
 rpf_count_threshold <- 1e6  
 bin_size <- 0.5         
 length_range <- min_len:max_len 
