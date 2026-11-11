@@ -59,6 +59,7 @@ mkdir -p 1.raw_fastq
 cp YOUR_DATA_SAMPLE*.fastq.gz 1.raw_fastq/
 cp ~/simple-ribo/example/ribo_sample.csv 1.raw_fastq/    # sample_name,adapter_3,adapter_5
 cp ~/simple-ribo/example/group.csv 1.raw_fastq/          # sample_name,group_name
+cp ~/simple-ribo/example/list.txt 1.raw_fastq/           # gene_name(ATF4)
 ```
 Ribo‑seq
 ```bash
