@@ -39,10 +39,6 @@ species_config<- list(
     gtf = "~/reference/human_transcriptome/gencode.v49.pc_annotation.gtf",
     fasta = "~/reference/human_transcriptome/gencode.v49.pc_transcripts.fa"
   ),
-  yeast = list(
-    gtf = "~/reference/yeast_R64/Saccharomyces_cerevisiae.R64-1-1.63.gtf",
-    fasta = "~/reference/yeast_R64/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa"
-  ),
   mouse = list(
     gtf = "~/reference/mouse_transcriptome/gencode.vM35.pc_annotation.gtf",
     fasta = "~/reference/mouse_transcriptome/gencode.vM35.pc_transcripts.fa"
