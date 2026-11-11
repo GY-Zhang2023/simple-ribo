@@ -66,36 +66,26 @@ strip_version <- FALSE
 if (!file.exists(tx2gene_path)) {
   cat(paste0("⚠️ tx2gene not found, auto-generate from GTF/GFF: ", gtf_path, "\n"))
 
-  # awk script:
-  # 1. skip comment lines starting with #
-  # 2. field 3 == transcript (GTF) OR field3 == mRNA (GFF3)
-  # 3. parse attributes, split by ;, extract transcript_id, gene_id, gene_name
-  # 4. print tid, gid, gname; missing gname -> gid
   awk_script <- '
   BEGIN{FS="\\t"; OFS="\\t"}
   /^#/{next}
   $3=="transcript" || $3=="mRNA"{
-    tid=""; gid=""; gname=""
+    tid=""; gname=""
     n=split($NF,arr,/;/)
     for(i=1;i<=n;i++){
       gsub(/^[[:space:]]+|[[:space:]]+$/, "", arr[i])
       if(arr[i] ~ /^transcript_id /){
         sub(/^transcript_id "/,"",arr[i]); sub(/".*/,"",arr[i]); tid=arr[i]
       }
-      if(arr[i] ~ /^gene_id /){
-        sub(/^gene_id "/,"",arr[i]); sub(/".*/,"",arr[i]); gid=arr[i]
-      }
       if(arr[i] ~ /^gene_name /){
         sub(/^gene_name "/,"",arr[i]); sub(/".*/,"",arr[i]); gname=arr[i]
       }
     }
-    if(tid!="" && gid!=""){
-      if(gname=="") gname=gid
-      print tid, gid, gname
+    if(tid!="" && gname!=""){
+      print tid, gname
     }
   }'
 
-  # run awk
   cmd <- paste0("awk '", awk_script, "' ", gtf_path)
   raw <- tryCatch({
     system(cmd, intern = TRUE)
@@ -105,12 +95,9 @@ if (!file.exists(tx2gene_path)) {
   })
 
   if (!is.null(raw) && length(raw) > 0) {
-    tx2gene <- data.table::fread(text = raw, header = FALSE, col.names = c("transcript","gene_id","gene_name"))
+    tx2gene <- data.table::fread(text = raw, header = FALSE, col.names = c("transcript","gene_name"))
   } else {
-    # --------------------------
-    # Pure R fallback branch
-    # read only last column as attr, no fixed column assumption
-    # --------------------------
+    # Pure R fallback
     gtf_raw <- data.table::fread(gtf_path, sep = "\t", header = FALSE, skip = "#", fill = TRUE)
     feature_col <- gtf_raw[[3]]
     attr_col    <- gtf_raw[[ncol(gtf_raw)]]
@@ -127,31 +114,27 @@ if (!file.exists(tx2gene_path)) {
     parsed_list <- lapply(split_attr, parse_attr)
 
     tid   <- vapply(parsed_list, function(m) m[["transcript_id"]], FUN.VALUE = "")
-    gid   <- vapply(parsed_list, function(m) ifelse(!is.na(m[["gene_id"]]), m[["gene_id"]], NA_character_), FUN.VALUE = "")
-    gname <- vapply(parsed_list, function(m) ifelse(!is.na(m[["gene_name"]]), m[["gene_name"]], NA_character_), FUN.VALUE = "")
-    gname[is.na(gname)] <- gid[is.na(gname)]
-    valid <- !is.na(tid) & !is.na(gid)
-    tx2gene <- data.table(transcript=tid[valid], gene_id=gid[valid], gene_name=gname[valid])
+    gname <- vapply(parsed_list, function(m) m[["gene_name"]], FUN.VALUE = "")
+
+    valid <- !is.na(tid) & !is.na(gname) & tid != "" & gname != ""
+    tx2gene <- data.table(transcript = tid[valid], gene_name = gname[valid])
   }
 
-  # strip version
   if(strip_version){
     tx2gene[, transcript := sub("\\.[0-9]+$", "", transcript)]
-    tx2gene[, gene_id    := sub("\\.[0-9]+$", "", gene_id)]
   }
 
   tx2gene <- unique(tx2gene, by = "transcript")
 
-  # write tximport standard two-column file
   data.table::fwrite(
-    tx2gene[, .(transcript, gene_id)],
+    tx2gene,
     file = tx2gene_path,
     sep = "\t",
     row.names = FALSE,
     col.names = FALSE,
     quote = FALSE
   )
-  cat(paste0("✅ Auto generated tx2gene file (transcript -> gene_id): ", tx2gene_path, "\n"))
+  cat(paste0("✅ Auto generated tx2gene file (transcript -> gene_name): ", tx2gene_path, "\n"))
 }
 
 # 4. Read headerless tx2gene file, assign column names manually
@@ -159,10 +142,10 @@ tx2gene <- data.table::fread(
   tx2gene_path,
   header = FALSE,
   stringsAsFactors = FALSE,
-  col.names = c("transcript", "gene_id")
+  col.names = c("transcript", "gene_name")
 )
 
-# 5. Deduplication, enforce one transcript maps to one gene_id
+# 5. Deduplication, enforce one transcript maps to one gene_name
 tx2gene <- unique(tx2gene, by = "transcript")
 
 # 6. Logging for validation
